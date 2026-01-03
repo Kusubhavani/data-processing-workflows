@@ -1,1 +1,101 @@
-
+id,name,age,city,salary,joindate
+1,Donna Cervantes,56,Miami,54373.71,2025-10-23
+2,John Bush,46,Miami,48693.69,2022-11-11
+3,Eric Clayton,32,Chicago,69367.17,2021-12-15
+4,Tracy Mcgee,60,New York,99139.03,2023-06-12
+5,Brandon Guerrero,25,Miami,54523.32,2021-03-08
+6,Vanessa Ford,38,Chicago,80328.13,2021-12-16
+7,Curtis Sanchez,56,Chicago,85697.18,2024-12-20
+8,David Smith,36,New York,54258.25,2025-09-07
+9,Michelle Patterson,40,Boston,83692.98,2025-12-01
+10,Carlos Santos,28,Denver,62066.99,2021-12-30
+11,Sandra Smith,28,Houston,77938.35,2022-01-24
+12,Jordan Rivas,41,Denver,78011.78,2024-12-16
+13,Joshua Cruz,53,Phoenix,72146.48,2021-04-30
+14,Jonathan Garcia,57,Houston,45417.39,2021-04-26
+15,Christopher Wilson,41,Phoenix,90118.15,2025-05-29
+16,Felicia Brown,20,Miami,59246.8,2022-01-15
+17,Crystal White,39,San Francisco,51191.11,2022-01-29
+18,Michael Castro,19,New York,42446.51,2023-12-04
+19,John Hines,41,Houston,75453.58,2021-06-04
+20,James Taylor,61,Houston,80653.86,2025-05-05
+21,Leslie Flores,47,Miami,40995.27,2024-07-11
+22,Gregory Fry,55,Boston,70725.58,2024-10-22
+23,Lisa Taylor,19,Chicago,53589.75,2025-02-27
+24,Adam Robinson,38,Miami,78710.37,2021-04-21
+25,Eric Rivas,50,Seattle,50461.99,2024-09-12
+26,Timothy Brewer,29,Chicago,81456.26,2025-10-13
+27,Bradley Gonzales,39,New York,63204.12,2021-04-06
+28,James Hansen,61,Chicago,96203.8,2022-02-02
+29,Jessica Alvarez,42,Boston,48251.26,2022-02-15
+30,Christina Smith,44,Chicago,60463.98,2024-01-02
+31,Rebecca Andrews,59,New York,46808.41,2022-10-09
+32,Michael Lee,45,Boston,95481.62,2022-10-06
+33,Joshua Gonzalez Jr.,33,Denver,92640.36,2025-04-30
+34,Maureen Alvarez,32,Houston,55476.5,2025-08-03
+35,Ricardo Mcclure,64,Houston,79599.04,2022-08-04
+36,Monica Santos,61,Phoenix,89033.33,2023-07-21
+37,Rebekah Thomas,20,Denver,73312.05,2023-12-27
+38,Mark Reyes,54,Denver,71779.03,2024-01-31
+39,Timothy Powell,24,Chicago,54511.14,2021-03-09
+40,Michael Williams,38,Houston,45586.17,2022-12-27
+41,John Maldonado,26,New York,93832.95,2025-12-09
+42,Andrew Rios,56,Los Angeles,94025.08,2022-04-14
+43,Robert Pacheco Jr.,35,Los Angeles,77986.09,2021-08-25
+44,April Powers,21,Boston,60341.79,2021-06-07
+45,Marie Odonnell,42,Houston,60952.57,2024-01-11
+46,Ralph Parker,31,Houston,83557.34,2022-05-12
+47,Miranda Banks,26,Los Angeles,93826.62,2022-03-02
+48,Curtis Lucero,43,Houston,93225.19,2022-09-21
+49,Colleen Jackson,19,Chicago,86792.53,2021-06-09
+50,Joshua Dawson,37,Seattle,78521.9,2023-02-23
+51,Cathy Peterson,45,San Francisco,45048.4,2021-09-23
+52,Helen Liu,64,Denver,49697.72,2024-12-11
+53,Kimberly Hardy,24,Phoenix,93913.25,2021-07-26
+54,Gabrielle Collier,61,Boston,76385.74,2021-07-03
+55,Joshua Stanton,25,Seattle,40551.82,2024-01-21
+56,David Boyle,64,Los Angeles,46088.29,2023-06-25
+57,George Willis,52,Denver,79810.11,2025-10-31
+58,Mindy Freeman,31,Houston,40303.7,2022-03-10
+59,Heather Wong,34,Phoenix,49648.48,2025-11-05
+60,Tiffany Reyes,53,Houston,72924.03,2023-07-19
+61,Michael Boyd,57,New York,81513.71,2023-09-17
+62,Joseph Simmons,21,New York,79117.68,2022-02-26
+63,Crystal Clark,19,Phoenix,53456.16,2021-02-06
+64,Dominic Cain,23,Phoenix,82730.75,2022-09-08
+65,Brian Ferrell,59,Los Angeles,54234.95,2021-09-10
+66,Anthony Smith,21,Phoenix,59523.98,2024-08-15
+67,Stephanie Vaughn,46,Chicago,84789.48,2023-02-13
+68,Diane Cisneros,35,Houston,78977.97,2025-08-31
+69,Sheila Grant,43,Seattle,90953.4,2025-07-19
+70,Cindy Gonzalez,61,Miami,79456.77,2024-07-09
+71,David Kim,51,Phoenix,74098.52,2025-08-20
+72,Isaiah Calderon,27,Boston,45620.49,2022-04-11
+73,Michael Martinez,53,New York,62062.95,2024-10-24
+74,Donna Turner,31,Chicago,55912.14,2025-01-19
+75,Joshua Berry,48,Denver,54639.38,2022-04-30
+76,Sherry Oliver,65,Miami,98380.63,2023-08-02
+77,Stacie Jones,32,Seattle,63585.86,2025-02-06
+78,Angela Fisher,25,Miami,93522.79,2023-08-29
+79,Kimberly Mcguire,31,Phoenix,77868.32,2023-06-22
+80,Tina Garcia,40,Los Angeles,87688.68,2024-08-07
+81,Lee Flowers,57,New York,70158.23,2022-07-06
+82,Zachary Blanchard,38,New York,74614.23,2022-09-20
+83,Christian Huynh,33,Denver,69551.06,2024-02-04
+84,Jeffrey Ramsey,62,Los Angeles,51714.58,2025-06-11
+85,Amanda Johnson,35,Houston,83347.13,2022-12-11
+86,Eric Chang,64,San Francisco,56846.34,2022-05-31
+87,Natalie Thompson,41,Chicago,41458.96,2024-09-01
+88,Thomas Adams,43,New York,78728.34,2023-10-05
+89,Robert Newman,42,Boston,50626.64,2025-07-14
+90,Gina Vasquez,62,New York,96427.52,2024-10-21
+91,Elizabeth Perez,58,Miami,97235.71,2021-07-26
+92,Cory Hawkins,46,New York,94891.86,2021-11-16
+93,Eric Farmer,32,New York,62209.52,2023-08-30
+94,Tammy Larson,62,San Francisco,40927.4,2024-04-09
+95,Jordan Johnson,18,San Francisco,95699.11,2025-08-31
+96,Patricia Bowman,42,Seattle,65691.05,2023-01-04
+97,Luis Jefferson,24,Houston,97999.29,2021-03-24
+98,Lisa Ford,26,Boston,97817.2,2021-01-05
+99,Michael Miller,41,New York,91180.57,2022-12-01
+100,Walter Meyer,18,New York,57666.93,2022-02-26
