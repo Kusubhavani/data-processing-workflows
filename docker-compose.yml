@@ -1,38 +1,104 @@
-version: '3.8'
-x-airflow-common:
-  &airflow-common
-  image: apache/airflow:2.8.0
-  environment: &airflow-common-env
-    AIRFLOW__CORE__EXECUTOR: LocalExecutor
-    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow_user:airflow_pass@postgres:5432/airflow_db
-    AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
-    AIRFLOW_UID: 50000
-  volumes:
-    - ./dags:/opt/airflow/dags
-    - ./logs:/opt/airflow/logs
-    - ./plugins:/opt/airflow/plugins
-    - ./data:/opt/airflow/data
-    - ./output:/opt/airflow/output
-    - ./tests:/opt/airflow/tests
-  user: "${AIRFLOW_UID:-50000}:0"
-
 services:
   postgres:
     image: postgres:13
+    container_name: postgres
     environment:
+      POSTGRES_DB: airflow_db
       POSTGRES_USER: airflow_user
       POSTGRES_PASSWORD: airflow_pass
-      POSTGRES_DB: airflow_db
-    volumes:
-      - postgres-db-volume:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    volumes:
+      - postgres-db-volume:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "airflow_user"]
       interval: 5s
       retries: 5
+      timeout: 5s
 
   airflow-init:
-    <<: *airflow-common
-    entrypoint: /bin/bash
-    # ... rest matches earlier full example
+    image: apache/airflow:2.8.1
+    container_name: airflow-init
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow_user:airflow_pass@postgres/airflow_db
+      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+      AIRFLOW_UID: 50000
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+      - ./data:/opt/airflow/data
+      - ./output:/opt/airflow/output
+      - ./tests:/opt/airflow/tests
+    command: |
+      bash -c "
+      echo '=== Starting Airflow initialization ==='
+      echo '1. Starting DB migration...'
+      /entrypoint airflow db migrate
+      echo '2. DB migration completed!'
+      echo '3. Creating admin user...'
+      /entrypoint airflow users create -u admin -f Admin -l User -r Admin -e admin@example.com -p admin
+      echo '4. Admin user created successfully!'
+      echo '=== Airflow initialization completed ==='
+      "
+
+  airflow-webserver:
+    image: apache/airflow:2.8.1
+    container_name: airflow-webserver
+    depends_on:
+      postgres:
+        condition: service_healthy
+      airflow-init:
+        condition: service_completed_successfully
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow_user:airflow_pass@postgres/airflow_db
+      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+      AIRFLOW__WEBSERVER__EXPOSE_CONFIG: 'true'
+      AIRFLOW_UID: 50000
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+      - ./data:/opt/airflow/data
+      - ./output:/opt/airflow/output
+      - ./tests:/opt/airflow/tests
+    command: webserver
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+
+  airflow-scheduler:
+    image: apache/airflow:2.8.1
+    container_name: airflow-scheduler
+    depends_on:
+      postgres:
+        condition: service_healthy
+      airflow-init:
+        condition: service_completed_successfully
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow_user:airflow_pass@postgres/airflow_db
+      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+      AIRFLOW_UID: 50000
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+      - ./data:/opt/airflow/data
+      - ./output:/opt/airflow/output
+      - ./tests:/opt/airflow/tests
+    command: scheduler
+    restart: unless-stopped
+
+volumes:
+  postgres-db-volume:
