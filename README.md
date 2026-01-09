@@ -178,11 +178,17 @@ docker exec -it airflow-webserver airflow dags clear --all --yes
 docker exec -it airflow-webserver airflow dags trigger --all
 ```
 Open http://localhost:8081
+
 Login with admin / admin
+
 Enable DAGs
+
 Trigger DAGs manually
+
 Monitor via Graph, Grid, and Logs
+
 FINAL STATUS
+
 All DAGs executed successfully:
 
 DAG 1 ✅
