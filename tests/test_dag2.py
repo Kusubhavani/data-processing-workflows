@@ -1,29 +1,51 @@
 from airflow.models import DagBag
-import pytest
-from dags.dag2_data_transformation import create_transformed_table, transform_data
+from airflow.utils.dag_cycle_tester import check_cycle
+
 
 def test_dag2_loaded():
-    dagbag = DagBag(dag_folder='../dags/', include_examples=False)
-    assert 'data_transformation_pipeline' in dagbag.dags
+    dagbag = DagBag(dag_folder="dags", include_examples=False)
+    assert "data_transformation_pipeline" in dagbag.dags
     assert len(dagbag.import_errors) == 0
 
-def test_dag2_structure():
-    dagbag = DagBag(dag_folder='../dags/', include_examples=False)
-    dag = dagbag.dags['data_transformation_pipeline']
+
+def test_dag2_task_count():
+    dag = DagBag(dag_folder="dags", include_examples=False).dags[
+        "data_transformation_pipeline"
+    ]
     assert len(dag.tasks) == 2
 
-def test_dag2_task_dependencies():
-    dagbag = DagBag(dag_folder='../dags/', include_examples=False)
-    dag = dagbag.dags['data_transformation_pipeline']
-    create_task = dag.get_task('create_transformed_table')
-    transform_task = dag.get_task('transform_and_load')
-    assert transform_task in create_task.downstream_list
+
+def test_dag2_task_ids():
+    dag = DagBag(dag_folder="dags", include_examples=False).dags[
+        "data_transformation_pipeline"
+    ]
+    task_ids = {task.task_id for task in dag.tasks}
+    assert task_ids == {
+        "create_transformed_table",
+        "transform_and_load",
+    }
+
+
+def test_dag2_dependencies():
+    dag = DagBag(dag_folder="dags", include_examples=False).dags[
+        "data_transformation_pipeline"
+    ]
+
+    create = dag.get_task("create_transformed_table")
+    transform = dag.get_task("transform_and_load")
+
+    assert transform in create.downstream_list
+
+
+def test_dag2_schedule():
+    dag = DagBag(dag_folder="dags", include_examples=False).dags[
+        "data_transformation_pipeline"
+    ]
+    assert dag.schedule_interval == "@daily"
+
 
 def test_dag2_no_cycles():
-    dagbag = DagBag(dag_folder='../dags/', include_examples=False)
-    dag = dagbag.dags['data_transformation_pipeline']
-    dag.test_cycle()
-
-def test_dag2_functions():
-    assert callable(create_transformed_table)
-    # transform_data needs DB, skip full or mock
+    dag = DagBag(dag_folder="dags", include_examples=False).dags[
+        "data_transformation_pipeline"
+    ]
+    check_cycle(dag)
